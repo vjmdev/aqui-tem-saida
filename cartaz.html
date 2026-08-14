@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cartaz para impressão — Aqui Tem Saída</title>
+<meta name="description" content="Cartaz A4 para a sala dos professores: sinais de violência contra crianças, fluxo de comunicação ao Conselho Tutelar e telefones de emergência.">
+<meta name="theme-color" content="#101E33">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estilo.css">
+
+<style>
+/* ---------- Cartaz A4 ---------- */
+.cartaz {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto;
+  background: #fff;
+  color: #101E33;
+  padding: 14mm 13mm;
+  box-shadow: 0 4px 40px rgba(16,30,51,.18);
+  display: flex;
+  flex-direction: column;
+  gap: 6mm;
+}
+
+.cartaz__topo {
+  border-bottom: 3px solid #101E33;
+  padding-bottom: 4mm;
+}
+.cartaz__eyebrow {
+  font-family: var(--mono); font-size: 8.5pt; font-weight: 600;
+  letter-spacing: .16em; text-transform: uppercase; color: #B3352C;
+  margin: 0 0 2mm;
+}
+.cartaz h1 {
+  font-size: 25pt; line-height: 1.02; margin: 0 0 2mm; letter-spacing: -.025em;
+}
+.cartaz__sub { font-size: 10pt; color: #4C5A70; margin: 0; max-width: none; }
+
+/* Faixa de telefones */
+.cartaz__fones {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm;
+}
+.fone {
+  border: 2px solid #101E33; border-radius: 3mm;
+  padding: 3.5mm 4mm; text-align: center;
+}
+.fone--urgente { background: #101E33; color: #fff; }
+.fone strong {
+  display: block; font-family: var(--mono); font-size: 26pt;
+  font-weight: 600; line-height: 1; letter-spacing: -.02em;
+}
+.fone span { display: block; font-size: 8pt; line-height: 1.3; margin-top: 1.5mm; }
+.fone--urgente span { color: #C9D4E4; }
+
+/* Blocos do fluxo */
+.cartaz__fluxo { display: grid; gap: 3.5mm; }
+.etapa {
+  display: grid; grid-template-columns: 11mm 1fr; gap: 4mm; align-items: start;
+  border: 1.5px solid #D3DBE5; border-left: 5px solid #1F6F5C;
+  border-radius: 2.5mm; padding: 3.5mm 4mm;
+}
+.etapa__num {
+  width: 11mm; height: 11mm; border-radius: 50%;
+  background: #1F6F5C; color: #fff;
+  font-family: var(--mono); font-size: 13pt; font-weight: 600;
+  display: grid; place-items: center;
+}
+.etapa h2 { font-size: 12.5pt; margin: 1mm 0 1.5mm; letter-spacing: -.01em; }
+.etapa p { font-size: 9.5pt; line-height: 1.42; margin: 0; color: #2B3B57; max-width: none; }
+
+/* Colunas observar / não fazer */
+.cartaz__duplo { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.caixa { border-radius: 2.5mm; padding: 4mm 4.5mm; }
+.caixa--observar { background: #FBF1DF; border: 1.5px solid #E4C489; }
+.caixa--evitar { background: #FAEAE8; border: 1.5px solid #EED3CF; }
+.caixa h2 { font-size: 11pt; margin: 0 0 2mm; }
+.caixa--observar h2 { color: #7A5410; }
+.caixa--evitar h2 { color: #8E2A22; }
+.caixa ul { margin: 0; padding-left: 4.5mm; }
+.caixa li { font-size: 8.8pt; line-height: 1.4; margin-bottom: 1.4mm; }
+
+/* Rodapé do cartaz */
+.cartaz__base {
+  margin-top: auto; border-top: 2px solid #101E33; padding-top: 3mm;
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 4mm;
+}
+.cartaz__lei { font-size: 8pt; line-height: 1.4; color: #4C5A70; max-width: 118mm; margin: 0; }
+.cartaz__marca { text-align: right; font-size: 8pt; color: #4C5A70; }
+.cartaz__marca strong { display: block; font-family: var(--display); font-size: 11pt; color: #101E33; }
+
+/* Visualização em tela pequena */
+@media (max-width: 900px) {
+  .cartaz { width: 100%; min-height: 0; padding: 22px 18px; box-shadow: none; }
+  .cartaz h1 { font-size: 1.6rem; }
+  .fone strong { font-size: 1.7rem; }
+  .cartaz__duplo { grid-template-columns: 1fr; }
+}
+
+/* ---------- Impressão ---------- */
+@page { size: A4 portrait; margin: 0; }
+
+@media print {
+  body { background: #fff !important; padding: 0 !important; }
+  .barra-seguranca, .cabecalho, .rodape, .emergencia-movel,
+  .secao--tela, .pular { display: none !important; }
+  .cartaz {
+    width: 210mm; min-height: 297mm; margin: 0;
+    box-shadow: none; page-break-after: avoid;
+  }
+  .fone--urgente { background: #101E33 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .etapa__num { background: #1F6F5C !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .caixa--observar, .caixa--evitar { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+</style>
+</head>
+<body>
+
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+<div class="barra-seguranca">
+  <div class="envoltorio barra-seguranca__interno">
+    <a class="barra-seguranca__dica" href="denunciar.html#navegacao-segura">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5 2.5 3.8v3.6c0 3.4 2.3 6.5 5.5 7.3 3.2-.8 5.5-3.9 5.5-7.3V3.8L8 1.5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+      Como navegar sem deixar rastros
+    </a>
+    <button class="saida-rapida" type="button" data-saida-rapida>Sair rápido <span class="saida-rapida__atalho">Esc</span></button>
+  </div>
+</div>
+
+<header class="cabecalho">
+  <div class="envoltorio cabecalho__interno">
+    <a class="marca" href="index.html">
+      <svg class="marca__simbolo" width="36" height="36" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+        <rect x="1" y="1" width="32" height="32" rx="9" fill="#101E33"/>
+        <path d="M10 25.5V15.2A5.7 5.7 0 0 1 15.7 9.5 5.7 5.7 0 0 1 21.4 15.2v10.3" stroke="#fff" stroke-width="2.1" stroke-linecap="round"/>
+        <path d="M21.5 17.4h5.4" stroke="#E4A93C" stroke-width="2.1" stroke-linecap="round"/>
+        <path d="m24.3 14.6 2.8 2.8-2.8 2.8" stroke="#E4A93C" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="marca__texto"><span>Aqui Tem Saída</span><small>Informação e denúncia sobre violência doméstica</small></span>
+    </a>
+    <button class="menu-botao" type="button" data-menu-botao aria-expanded="false" aria-controls="navegacao">
+      <svg width="17" height="17" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M2 4.5h14M2 9h14M2 13.5h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg> Menu
+    </button>
+    <nav class="navegacao" id="navegacao" data-navegacao aria-label="Navegação principal">
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="o-que-e.html">O que é</a></li>
+        <li><a href="direitos.html">Direitos e leis</a></li>
+        <li><a href="denunciar.html">Como denunciar</a></li>
+        <li><a href="rede-de-apoio.html">Rede de apoio</a></li>
+        <li><a href="universidade.html">Universitários</a></li>
+        <li><a href="escolas.html">Para escolas</a></li>
+        <li><a href="familias.html">Famílias</a></li>
+        <li><a href="sobre.html">O projeto</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="conteudo">
+
+  <section class="secao secao--tela" style="padding-bottom:24px">
+    <div class="envoltorio">
+      <span class="rotulo">Material para impressão</span>
+      <h1>Cartaz para a sala dos professores</h1>
+      <p style="color:var(--noite-suave);font-size:1.05rem">
+        Formato A4. Imprima e afixe no mural da sala dos professores, da coordenação ou da secretaria.
+        O que aparece abaixo é exatamente o que sai na folha.
+      </p>
+      <div class="grupo-botoes" style="margin-top:22px">
+        <button class="botao botao--principal" type="button" data-imprimir>Imprimir cartaz</button>
+        <a class="botao botao--contorno" href="denunciar.html#cartao">Cartão de bolso</a>
+      </div>
+      <p class="base-legal" style="margin-top:20px;max-width:62ch">
+        Na janela de impressão, ative <strong>Gráficos de plano de fundo</strong> (em "Mais configurações") para que
+        as cores saiam. Deixe as margens em <strong>Nenhuma</strong> ou <strong>Padrão</strong> e o papel em A4.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== CARTAZ ===== -->
+  <div class="cartaz">
+
+    <div class="cartaz__topo">
+      <p class="cartaz__eyebrow">Comunicar é obrigação legal — não é escolha pessoal</p>
+      <h1>Suspeita de violência contra criança: o que a escola faz</h1>
+      <p class="cartaz__sub">Guia rápido para professores, coordenação e funcionários. Em caso de risco imediato, ligue 190 antes de qualquer outra providência.</p>
+    </div>
+
+    <div class="cartaz__fones">
+      <div class="fone fone--urgente">
+        <strong>190</strong>
+        <span>Polícia Militar<br>Risco imediato</span>
+      </div>
+      <div class="fone">
+        <strong>100</strong>
+        <span>Direitos Humanos<br>Denúncia, inclusive anônima</span>
+      </div>
+      <div class="fone">
+        <strong>180</strong>
+        <span>Central da Mulher<br>Orientação 24h</span>
+      </div>
+    </div>
+
+    <div class="cartaz__fluxo">
+      <div class="etapa">
+        <span class="etapa__num">1</span>
+        <div>
+          <h2>Acolha sem interrogar</h2>
+          <p>Se a criança falar espontaneamente, escute com calma e sem demonstrar choque. <strong>Não faça perguntas de detalhe.</strong> A Lei 13.431/2017 reserva a entrevista aprofundada a profissionais capacitados, para a criança não precisar repetir a história várias vezes.</p>
+        </div>
+      </div>
+      <div class="etapa">
+        <span class="etapa__num">2</span>
+        <div>
+          <h2>Registre por escrito no mesmo dia</h2>
+          <p>Anote data, horário, local, o que foi dito <strong>nas palavras da própria criança</strong>, o que você observou e quem estava presente. Evite interpretações e conclusões. Esse registro pode ser decisivo depois.</p>
+        </div>
+      </div>
+      <div class="etapa">
+        <span class="etapa__num">3</span>
+        <div>
+          <h2>Comunique à gestão e ao Conselho Tutelar</h2>
+          <p>Leve imediatamente à direção ou à coordenação, que faz a comunicação formal ao Conselho Tutelar. Peça retorno por escrito sobre as providências adotadas.</p>
+        </div>
+      </div>
+      <div class="etapa">
+        <span class="etapa__num">4</span>
+        <div>
+          <h2>Mantenha o vínculo</h2>
+          <p>Depois da comunicação, siga sendo presença estável: rotina previsível, escuta disponível e atenção à frequência escolar.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cartaz__duplo">
+      <div class="caixa caixa--observar">
+        <h2>Sinais que merecem atenção</h2>
+        <ul>
+          <li>Regressão: voltar a fazer xixi na cama, chupar dedo, falar como criança menor</li>
+          <li>Medo de adultos ou de ir para casa</li>
+          <li>Lesões em locais pouco expostos, com explicações que mudam</li>
+          <li>Desenhos e brincadeiras com conteúdo violento ou sexual fora da idade</li>
+          <li>Fome fora do comum, higiene precária, roupa inadequada ao clima</li>
+          <li>Faltas frequentes e queda brusca no rendimento</li>
+          <li>Isolamento ou agressividade novos</li>
+        </ul>
+      </div>
+      <div class="caixa caixa--evitar">
+        <h2>O que nunca fazer</h2>
+        <ul>
+          <li><strong>Não prometa segredo.</strong> Explique que precisa contar para adultos que podem ajudar</li>
+          <li><strong>Não confronte a família.</strong> Expõe a criança a retaliação e compromete a apuração</li>
+          <li><strong>Não investigue.</strong> Isso é atribuição do Conselho Tutelar e da polícia</li>
+          <li><strong>Não duvide em voz alta</strong> do que a criança relatou</li>
+          <li><strong>Não faça a criança repetir</strong> a história para vários profissionais</li>
+          <li><strong>Não cite o nome</strong> da criança em grupos de mensagens</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cartaz__base">
+      <p class="cartaz__lei">
+        <strong>Base legal:</strong> o art. 13 do Estatuto da Criança e do Adolescente obriga a comunicação de casos suspeitos
+        ou confirmados de maus-tratos ao Conselho Tutelar. O art. 245 prevê multa para o professor ou dirigente
+        que deixar de comunicar. A Lei 13.431/2017 estabelece a escuta especializada e o depoimento especial
+        para evitar a revitimização.
+      </p>
+      <div class="cartaz__marca">
+        <strong>Aqui Tem Saída</strong>
+        Projeto de extensão<br>UNIASSELVI
+      </div>
+    </div>
+
+  </div>
+
+  <section class="secao secao--tela">
+    <div class="envoltorio">
+      <div class="aviso aviso--neutro">
+        <span class="aviso__icone" aria-hidden="true">i</span>
+        <div>
+          <h3>Sugestões de uso</h3>
+          <p>Afixe no mural da sala dos professores e deixe uma cópia na coordenação e na secretaria. Vale apresentar o cartaz em reunião pedagógica ou HTPC, para que o fluxo seja combinado antes de acontecer um caso — decidir sob pressão é o que costuma dar errado.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="rodape">
+  <div class="envoltorio">
+    <div class="rodape__grade">
+      <div>
+        <h4>Aqui Tem Saída</h4>
+        <p style="color:#A9B8CC">Informação, direitos e canais de denúncia sobre violência doméstica. Projeto de extensão universitária.</p>
+      </div>
+      <div>
+        <h4>Navegue</h4>
+        <ul>
+          <li><a href="o-que-e.html">O que é violência doméstica</a></li>
+          <li><a href="direitos.html">Direitos e leis</a></li>
+          <li><a href="denunciar.html">Como denunciar</a></li>
+          <li><a href="rede-de-apoio.html">Rede de apoio</a></li>
+          <li><a href="universidade.html">Para universitários</a></li>
+          <li><a href="escolas.html">Para escolas</a></li>
+          <li><a href="familias.html">Para famílias</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Emergência</h4>
+        <ul>
+          <li><a href="tel:190">190 — Polícia Militar</a></li>
+          <li><a href="tel:180">180 — Central da Mulher</a></li>
+          <li><a href="tel:100">100 — Direitos Humanos</a></li>
+          <li><a href="tel:181">181 — Disque Denúncia</a></li>
+          <li><a href="tel:192">192 — SAMU</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Fontes oficiais</h4>
+        <ul>
+          <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm" rel="noopener">Lei Maria da Penha</a></li>
+          <li><a href="https://www.gov.br/mulheres/pt-br" rel="noopener">Ministério das Mulheres</a></li>
+          <li><a href="https://www.cnj.jus.br/programas-e-acoes/violencia-contra-a-mulher/" rel="noopener">CNJ — Violência contra a mulher</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="rodape__base">
+      <span>© <span data-ano>2026</span> Aqui Tem Saída — conteúdo educativo de uso livre.</span>
+      <span>Este site não coleta dados pessoais e não usa cookies.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="emergencia-movel">
+  <a class="urgente" href="tel:190"><strong>190</strong><span>Emergência</span></a>
+  <a href="tel:180"><strong>180</strong><span>Central da Mulher</span></a>
+</div>
+
+<script src="assets/js/principal.js"></script>
+</body>
+</html>

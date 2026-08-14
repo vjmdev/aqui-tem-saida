@@ -49,7 +49,7 @@ mantenha o botão de saída rápida visível **em todas as páginas**.
 2. **Serviços locais** — `rede-de-apoio.html`, seção "Onde procurar aqui perto". A tabela está com
    "Preencher". Levante endereços e telefones com a instituição parceira e **ligue para confirmar cada um**
    antes de publicar. Telefone errado em site de violência doméstica é falha grave.
-3. **E-mail de contato** — `sobre.html`, atributo `data-email="contato@exemplo.org"` no `<form>`.
+3. **Sem canal de contato** — o site não tem formulário nem e-mail, por decisão de projeto: um canal sem plantão cria expectativa de resposta em quem precisa de ajuda imediata. Dúvidas sobre o projeto são tratadas diretamente com a instituição parceira.
 4. **Logotipo da instituição parceira** — pode entrar ao lado da marca, no cabeçalho.
 
 ---

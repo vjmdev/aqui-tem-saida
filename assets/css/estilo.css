@@ -444,9 +444,12 @@ tbody tr:last-child td { border-bottom: 0; }
   .rodape__grade { grid-template-columns: 1fr 1fr; }
 }
 
-@media (max-width: 760px) {
-  body { padding-bottom: 74px; }
+/* Navegação compacta em telas médias e menu recolhido abaixo de 1080px */
+@media (min-width: 1081px) {
+  .navegacao a { padding: 8px 10px; font-size: .92rem; }
+}
 
+@media (max-width: 1080px) {
   .menu-botao { display: inline-flex; }
 
   .navegacao {
@@ -460,6 +463,11 @@ tbody tr:last-child td { border-bottom: 0; }
   .navegacao a { padding: 13px 14px; font-size: 1rem; }
 
   .cabecalho { position: relative; }
+}
+
+@media (max-width: 760px) {
+  body { padding-bottom: 74px; }
+
   .cabecalho__interno { min-height: 66px; }
 
   .barra-seguranca__dica { display: none; }

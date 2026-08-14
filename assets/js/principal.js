@@ -114,41 +114,8 @@
     elemento.textContent = String(new Date().getFullYear());
   });
 
-  /* ---------- 5. Imprimir cartão de bolso ---------- */
+  /* ---------- 6. Imprimir cartão de bolso ---------- */
   document.querySelectorAll("[data-imprimir]").forEach(function (botao) {
     botao.addEventListener("click", function () { window.print(); });
   });
-
-  /* ---------- 6. Formulário de parcerias ----------
-     Sem back-end: monta um e-mail com os dados preenchidos.
-     Troque por um serviço (Formspree, Google Forms) se preferir. */
-  var formulario = document.querySelector("[data-formulario-parceria]");
-
-  if (formulario) {
-    formulario.addEventListener("submit", function (evento) {
-      evento.preventDefault();
-
-      var dados = new FormData(formulario);
-      var destino = formulario.getAttribute("data-email") || "contato@exemplo.org";
-      var assunto = "Contato institucional pelo site Aqui Tem Saída";
-      var corpo =
-        "Nome: " + (dados.get("nome") || "") + "\n" +
-        "Instituição: " + (dados.get("instituicao") || "") + "\n" +
-        "E-mail: " + (dados.get("email") || "") + "\n" +
-        "Cidade/UF: " + (dados.get("cidade") || "") + "\n" +
-        "Assunto: " + (dados.get("assunto") || "") + "\n\n" +
-        "Mensagem:\n" + (dados.get("mensagem") || "");
-
-      window.location.href =
-        "mailto:" + destino +
-        "?subject=" + encodeURIComponent(assunto) +
-        "&body=" + encodeURIComponent(corpo);
-
-      var retorno = formulario.querySelector("[data-retorno]");
-      if (retorno) {
-        retorno.hidden = false;
-        retorno.textContent = "Seu programa de e-mail foi aberto com a mensagem preenchida. Confira e envie para concluir.";
-      }
-    });
-  }
 })();
