@@ -133,17 +133,19 @@ strong { font-weight: 600; }
 .cabecalho { background: var(--branco); border-bottom: 1px solid var(--linha); }
 
 .cabecalho__interno {
-  display: flex; align-items: center; justify-content: space-between; gap: 18px;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
   min-height: 76px;
+  max-width: 1280px;
 }
 
-.marca { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--noite); }
+.marca { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--noite); flex: none; }
 .marca__simbolo { flex: none; display: block; }
 .marca__texto { display: flex; flex-direction: column; line-height: 1.1; }
 .marca__texto span:first-child {
   font-family: var(--display); font-weight: 800; font-size: 1.22rem; letter-spacing: -.02em;
+  white-space: nowrap;
 }
-.marca__texto small { font-size: .74rem; color: var(--noite-suave); letter-spacing: .01em; }
+.marca__texto small { font-size: .74rem; color: var(--noite-suave); letter-spacing: .01em; white-space: nowrap; }
 
 .menu-botao {
   display: none;
@@ -152,10 +154,11 @@ strong { font-weight: 600; }
   color: var(--noite); cursor: pointer; align-items: center; gap: 8px;
 }
 
-.navegacao ul { list-style: none; display: flex; gap: 4px; margin: 0; padding: 0; }
+.navegacao ul { list-style: none; display: flex; gap: 2px; margin: 0; padding: 0; }
 .navegacao a {
-  display: block; padding: 9px 13px; border-radius: var(--raio);
+  display: block; padding: 9px 11px; border-radius: var(--raio);
   font-size: .95rem; font-weight: 500; color: var(--noite-medio); text-decoration: none;
+  white-space: nowrap;
 }
 .navegacao a:hover { background: var(--brisa); color: var(--noite); }
 .navegacao a[aria-current="page"] {
@@ -444,12 +447,12 @@ tbody tr:last-child td { border-bottom: 0; }
   .rodape__grade { grid-template-columns: 1fr 1fr; }
 }
 
-/* Navegação compacta em telas médias e menu recolhido abaixo de 1080px */
-@media (min-width: 1081px) {
-  .navegacao a { padding: 8px 10px; font-size: .92rem; }
+/* Navegação compacta em telas médias e menu recolhido abaixo de 1160px */
+@media (min-width: 1161px) {
+  .navegacao a { padding: 9px 11px; font-size: .93rem; }
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 1160px) {
   .menu-botao { display: inline-flex; }
 
   .navegacao {
